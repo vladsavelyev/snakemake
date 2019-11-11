@@ -391,7 +391,7 @@ class Logger:
                 )
             elif level == "shellcmd":
                 if self.printshellcmds:
-                    self.logger.warning(indent(msg["msg"]))
+                    self.logger.warning(indent(msg["msg"].strip() + '\n'))
             elif level == "job_finished" and not self.quiet:
                 timestamp()
                 self.logger.info("Finished job {}.".format(msg["jobid"]))
