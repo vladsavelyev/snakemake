@@ -598,7 +598,7 @@ class DAG:
                 tempfiles = (
                     f
                     for f in job.expanded_output
-                    if is_temp(f) and f not in self.targetfiles
+                    if is_temp(f)
                 )
                 yield from filterfalse(partial(needed, job), tempfiles)
 
