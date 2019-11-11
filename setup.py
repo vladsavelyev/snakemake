@@ -25,7 +25,7 @@ except ImportError:
 
 setup(
     name="snakemake",
-    version=versioneer.get_version(),
+    version='5.24.0',
     cmdclass=versioneer.get_cmdclass(),
     author="Johannes Köster",
     author_email="johannes.koester@tu-dortmund.de",
