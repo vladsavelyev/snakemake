@@ -1022,13 +1022,18 @@ class DAG:
             # BFS into depending needrun jobs if in same group
             # Note: never go up here (into depending), because it may contain
             # jobs that have been sorted out due to e.g. ruleorder.
+            subjobs = [j for j in self.bfs(self.dependencies, job, stop=stop)]
+            combined_wildcards = dict()
+            for j in subjobs:
+                combined_wildcards.update(j.wildcards_dict)
             group = self.group_job_factory.new(
                 job.group,
                 (
                     job
-                    for job in self.bfs(self.dependencies, job, stop=stop)
+                    for job in subjobs
                     if self.needrun(job)
                 ),
+                combined_wildcards,
             )
 
             # merge with previously determined groups if present

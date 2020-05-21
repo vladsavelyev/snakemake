@@ -1058,13 +1058,13 @@ class GroupJobFactory:
     def __init__(self):
         self.cache = dict()
 
-    def new(self, id, jobs):
+    def new(self, id, jobs, wildcards_dict):
         jobs = frozenset(jobs)
         key = (id, jobs)
         try:
             obj = self.cache[key]
         except KeyError:
-            obj = GroupJob(id, jobs)
+            obj = GroupJob(id, jobs, wildcards_dict)
             self.cache[key] = obj
         return obj
 
@@ -1076,6 +1076,8 @@ class GroupJob(AbstractJob):
     __slots__ = [
         "groupid",
         "jobs",
+        "wildcards_dict",
+        "wildcards",
         "_resources",
         "_input",
         "_output",
@@ -1086,7 +1088,7 @@ class GroupJob(AbstractJob):
         "toposorted",
     ]
 
-    def __init__(self, id, jobs):
+    def __init__(self, id, jobs, wildcards_dict):
         self.groupid = id
         self.jobs = jobs
         self.toposorted = None
@@ -1097,6 +1099,9 @@ class GroupJob(AbstractJob):
         self._inputsize = None
         self._all_products = None
         self._attempt = self.dag.workflow.attempt
+
+        self.wildcards_dict = wildcards_dict
+        self.wildcards = Wildcards(fromdict=self.wildcards_dict)
 
     @property
     def dag(self):
@@ -1269,6 +1274,7 @@ class GroupJob(AbstractJob):
             "local": self.is_local,
             "input": self.input,
             "output": self.output,
+            "wildcards": self.wildcards_dict,
             "threads": self.threads,
             "resources": resources,
             "jobid": self.jobid,
