@@ -116,8 +116,10 @@ Resources
   executing/cli
   executing/cluster
   executing/cloud
+  executing/grouping
   executing/caching
   executing/interoperability
+  executing/monitoring
 
 .. toctree::
     :caption: Defining workflows
@@ -133,6 +135,7 @@ Resources
     snakefiles/utils
     snakefiles/deployment
     snakefiles/reporting
+    snakefiles/testing
 
 
 .. toctree::

@@ -6,6 +6,7 @@ Google Life Sciences Tutorial
 
 .. _Snakemake: http://snakemake.readthedocs.io
 .. _Snakemake Remotes: https://snakemake.readthedocs.io/en/stable/snakefiles/remote_files.html
+.. _Python: https://www.python.org/
 
 
 Setup
@@ -57,6 +58,15 @@ can refer to the page under iam-admin to `download your service account <https:/
 .. code:: console
 
     export GOOGLE_APPLICATION_CREDENTIALS="/home/[username]/credentials.json"
+
+
+The suggested, minimal permissions required for this role include the following:
+
+ - Compute Storage Admin(Can potentially be restricted further)
+ - Compute Viewer
+ - Service Account User
+ - Cloud Life Sciences Workflows Runner
+ - Service Usage Consumer
 
 
 Step 1: Upload Your Data
